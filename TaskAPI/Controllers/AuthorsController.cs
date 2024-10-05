@@ -24,6 +24,7 @@ namespace TaskAPI.Controllers
             var authors = _authorSqlService.GetAllAuthors();
             var authorDto = new List<AuthorDto>();
 
+            //before use automapper
             foreach (var author in authors)
             {
                 authorDto.Add(new AuthorDto
