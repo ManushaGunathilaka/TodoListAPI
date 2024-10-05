@@ -22,36 +22,21 @@ namespace TaskAPI.Controllers
         public ActionResult<ICollection<AuthorDto>> GetAuthors()
         {
             var authors = _authorSqlService.GetAllAuthors();
-            var authorDto = new List<AuthorDto>();
-
-            //before use automapper
-            foreach (var author in authors)
-            {
-                authorDto.Add(new AuthorDto
-                {
-                    Id = author.Id,
-                    FullName = author.FullName,
-                    Address = $"{author.AddressNo},{author.Street},{author.City}"
-                });
-            }
-            return Ok(authorDto);
+            var mappedAuthors = _mapper.Map<ICollection<AuthorDto>>(authors);
+            return Ok(mappedAuthors);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetAuthor(int id)
+        public ActionResult<AuthorDto> GetAuthor(int id)
         {
             var author = _authorSqlService.GetAuthor(id);
             if(author is null)
             {
                 return NotFound();
             }
-            var authorDto = new AuthorDto
-            {
-                Id = author.Id,
-                FullName = author.FullName,
-                Address = $"{author.AddressNo},{author.Street},{author.City}"
-            };
-            return Ok(authorDto);
+            
+            var mappedAuthor = _mapper.Map<AuthorDto>(author);
+            return Ok(mappedAuthor);
         }
     }
 }
