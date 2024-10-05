@@ -28,7 +28,7 @@ namespace TaskAPI.Controllers
             return Ok(mappedTodos);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}",Name ="GetTodo")]
         public ActionResult<TodoDto> GetTodo(int authorId, int id)
         {
             var myTodo = _todoService.GetTodo(authorId,id);
@@ -40,6 +40,14 @@ namespace TaskAPI.Controllers
             return Ok(mappedTodo);
         }
 
-
+        [HttpPost]
+        public ActionResult<TodoDto> AddTodo(int authorId, CreateTodoDto todoDto)
+        {
+            var todoEntity = _mapper.Map<Todo>(todoDto);
+            var newTodo = _todoService.AddTodo(authorId,todoEntity);
+            var todoForReturn = _mapper.Map<TodoDto>(newTodo);
+            return CreatedAtRoute("GetTodo", new { authorId= authorId, id = todoForReturn.Id },
+                todoForReturn);
+        }
     }
 }

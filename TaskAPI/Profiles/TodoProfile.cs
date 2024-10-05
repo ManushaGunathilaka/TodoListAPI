@@ -9,6 +9,7 @@ namespace TaskAPI.Profiles
         public TodoProfile()
         {
             CreateMap<Todo,TodoDto>();
+            CreateMap<CreateTodoDto, Todo>();
         }
     }
 }
