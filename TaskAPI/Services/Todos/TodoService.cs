@@ -43,7 +43,7 @@ namespace TaskAPI.Services.Todos
             return todos;
         }
 
-        public Todo GetTodo(int id)
+        public Todo GetTodo(int authorId,int id)
         {
             throw new NotImplementedException();
         }

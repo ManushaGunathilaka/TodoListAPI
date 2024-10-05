@@ -24,14 +24,14 @@ namespace TaskAPI.Controllers
         public ActionResult<ICollection<TodoDto>> GetTodos(int authorId)
         {
             var myTodos= _todoService.AllTodos(authorId);
-            var mappedTodos = _mapper.Map<TodoDto>(myTodos);
+            var mappedTodos = _mapper.Map<ICollection<TodoDto>>(myTodos);
             return Ok(mappedTodos);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<TodoDto> GetTodo(int id)
+        public ActionResult<TodoDto> GetTodo(int authorId, int id)
         {
-            var myTodo = _todoService.GetTodo(id);
+            var myTodo = _todoService.GetTodo(authorId,id);
             if(myTodo is null)
             {
                 return NotFound();

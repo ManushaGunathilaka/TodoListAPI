@@ -10,9 +10,9 @@ namespace TaskAPI.Services.Todos
             return _context.Todos.Where(t => t.AuthorId == authorId).ToList();
         }
 
-        public Todo GetTodo(int id)
+        public Todo GetTodo(int authorId, int id)
         {
-            return _context.Todos.Find(id);
+            return _context.Todos.FirstOrDefault(t=>t.Id == id && t.AuthorId==authorId);
         }
     }
 }
