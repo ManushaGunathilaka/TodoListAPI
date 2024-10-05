@@ -4,7 +4,7 @@ namespace TaskAPI.Services.Todos
 {
     public class TodoService : ITodoRepository
     {
-        public List<Todo> AllTodos()
+        public List<Todo> AllTodos(int authorId )
         {
             var todos = new List<Todo>();
 
