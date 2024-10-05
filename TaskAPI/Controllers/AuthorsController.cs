@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskAPI.Dtos;
+using TaskAPI.Models;
 using TaskAPI.Services.Authors;
 
 namespace TaskAPI.Controllers
@@ -26,7 +27,7 @@ namespace TaskAPI.Controllers
             return Ok(mappedAuthors);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}",Name="GetAuthor")]
         public ActionResult<AuthorDto> GetAuthor(int id)
         {
             var author = _authorSqlService.GetAuthor(id);
@@ -37,6 +38,16 @@ namespace TaskAPI.Controllers
             
             var mappedAuthor = _mapper.Map<AuthorDto>(author);
             return Ok(mappedAuthor);
+        }
+
+        [HttpPost]
+        public ActionResult<AuthorDto> CreateAuthor(CreateAuthorDto author)
+        {
+            var authorEntity = _mapper.Map<Author>(author);
+            var newAuthor = _authorSqlService.AddAuthor(authorEntity);
+            var authorForReturn = _mapper.Map<AuthorDto>(newAuthor);
+            return CreatedAtRoute("GetAuthor", new {id=authorForReturn.Id},
+                authorForReturn);
         }
     }
 }
