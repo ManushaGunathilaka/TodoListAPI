@@ -18,10 +18,10 @@ namespace TaskAPI.Models
             // Seed data for Authors
             modelBuilder.Entity<Author>().HasData(new Author[]
             {
-                new Author { Id = 1, FullName = "Manusha Gunathilaka", AddressNo = "12", Street = "Main St", City = "Colombo" },
-                new Author { Id = 2, FullName = "Methsara Dissanayaka", AddressNo = "34", Street = "Green Ave", City = "Kandy" },
-                new Author { Id = 3, FullName = "Kalpa Wishwajith", AddressNo = "56", Street = "Highland Rd", City = "Galle" },
-                new Author { Id = 4, FullName = "Kusal Mendis", AddressNo = "78", Street = "Lake View", City = "Negombo" }
+                new Author { Id = 1, FullName = "Manusha Gunathilaka", AddressNo = "12", Street = "Main St", City = "Colombo",JobRole="Developer" },
+                new Author { Id = 2, FullName = "Methsara Dissanayaka", AddressNo = "34", Street = "Green Ave", City = "Kandy",JobRole="Systems Engineer" },
+                new Author { Id = 3, FullName = "Kalpa Wishwajith", AddressNo = "56", Street = "Highland Rd", City = "Galle",JobRole="Developer" },
+                new Author { Id = 4, FullName = "Kusal Mendis", AddressNo = "78", Street = "Lake View", City = "Negombo",JobRole="QA" }
 
             });
 
